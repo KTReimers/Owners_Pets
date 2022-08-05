@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Owner's Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+                <tr>
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.type}}</td>
+                    <td>{{pet.owner.first_name}} {{pet.owner.last_name}}</td>
+                    {% if session['owner_id'] == pet.owner.id%}
+                    <td><a href="/pet/{{pet.id}}">Show</a></td>
+                    <td><a href="/pet/edit/{{pet.id}}">edit</a></td>
+                    <form action="/delete/{{pet.id}}" method = "post">
+                        <td><button type="submit">Delete</button></td>
+                    </form>
+                    {% else %}
+                    <td><a href="/pet/{{pet.id}}">Show</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="pet/new"><button class="btn btn primary">Add a Pet!</button></a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/dashboard">back to dashboard</a> | <a href="/logout">Logout</a>
+    {% with messages = get_flashed_messages(category_filter=['pet']) %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Flash AHHHHHHH!!!!</strong>
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form action="/pet/create" method="post" class="col-6 mx-auto">
+        <input type="hidden" name="owner_id" value="{{session['owner_id']}}">
+        <h2 class="text-center">Add a new Pet!</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name"  class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" name="type"  class="form-control">
+        </div>
+        <input type="submit" value="Add Pet" class="btn btn-success">
+    </form>
+</body>
+</html>

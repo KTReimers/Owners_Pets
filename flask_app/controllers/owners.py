@@ -21,7 +21,7 @@ def register():
     }
     ownerId = owner.Owner.save(data)
     session['owner_id'] = ownerId
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/dashboard')
 def dashboard():

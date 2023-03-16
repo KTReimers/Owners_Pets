@@ -21,7 +21,7 @@ class Owner:
 # Create
     @classmethod
     def save(cls, data):
-        new_data =cls.parceData(data)
+        new_data =cls.parseData(data)
         query="""INSERT INTO owners (first_name, last_name, email, password)
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"""
         return connectToMySQL(cls.db).query_db(query,new_data)
@@ -85,7 +85,7 @@ class Owner:
         return is_valid
 
     @staticmethod
-    def parceData(data):
+    def parseData(data):
         user_data={
         'first_name': data['first_name'],
         'last_name': data['last_name'],

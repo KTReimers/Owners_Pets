@@ -21,9 +21,10 @@ class Owner:
 # Create
     @classmethod
     def save(cls, data):
+        new_data =cls.parceData(data)
         query="""INSERT INTO owners (first_name, last_name, email, password)
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"""
-        return connectToMySQL(cls.db).query_db(query,data)
+        return connectToMySQL(cls.db).query_db(query,new_data)
 
 # Read
     @classmethod
@@ -82,3 +83,13 @@ class Owner:
             flash('invalid email or password', 'login')
             is_valid=False
         return is_valid
+
+    @staticmethod
+    def parceData(data):
+        user_data={
+        'first_name': data['first_name'],
+        'last_name': data['last_name'],
+        'email': data['email'],
+        'password': bcrypt.generate_password_hash(data['password'])
+        }
+        return user_data

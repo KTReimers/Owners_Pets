@@ -10,7 +10,7 @@ def new_pet():
 
 @app.route('/pet/create', methods=['POST'])
 def create_pet():
-    if not pet.Pet.vlidate_pet(request.form):
+    if not pet.Pet.validate_pet(request.form):
         return redirect('/pet/new')
     new_pet=pet.Pet.save(request.form)
     return redirect('/dashboard')
@@ -27,7 +27,7 @@ def edit_pet(id):
 
 @app.route('/pet/update', methods=["POST"])
 def update_pet():
-    if not pet.Pet.vlidate_pet(request.form):
+    if not pet.Pet.validate_pet(request.form):
         return redirect(f'/pet/edit/{request.form["id"]}')
     pet.Pet.update(request.form)
     return redirect(f"/pet/{request.form['id']}")

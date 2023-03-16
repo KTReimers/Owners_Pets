@@ -85,7 +85,7 @@ class Pet:
 
 
     @staticmethod
-    def vlidate_pet(pet):
+    def validate_pet(pet):
         is_valid = True
         if len(pet['name']) <2:
             is_valid=False
